@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>HashCon</title>
+</head>
+<body>
+    <main>
+        
+    <div class="pb-8">
+        <div class="">
+            <h1 class="inline text-6xl font-extrabold">Hash<span class="text-red-600 font-extrabold">Con</span></h1>
+        </div>
+    </div>
+
+    <div class="flex flex-row justify-center items-center">
+    <div class="border border-stone-400 w-1/2 relative h-64">
+        <h1 class="text-4xl text-stone-400 text-center">Youtube to MP3 Converter</h1>
+        <form action="/convert" method="POST" class="">
+            <input type="text" placeholder="Enter Youtube link..." id="url" name="url" class="border border-red-600 border-2 absolute w-3/5 absolute h-12 my-12 ml-5"/>
+            <button type="submit" class="absolute right-0 bg-red-600 text-white w-1/4 h-12 my-12 mr-5">Convert</button>
+            <p class="text-red-700"> <%= error.first%> </p>
+        </form>
+    </div>
+    </div>
+    <div>
+        <h1>Best Free Youtube Music Downloader</h1>
+        <p>With HashCon, it allows anyone to easily convert youube videos to MP3 files and download into ther device. There is no need to install any third-part software or signup.</p>
+    </div>
+</main>
+
+</body>
+</html>
