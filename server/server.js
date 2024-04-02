@@ -1,11 +1,24 @@
 const express = require('express');
+const fs = require('fs');
 const dotenv = require('dotenv').config();
 const path = require('path');
 const bodyParser = require('body-parser');
-
+//const isValidUURL = require('./isValidURL');
+const youtubedl = require('youtube-dl-exec');
 
 
 port = process.env.PORT || 5001;
+
+const isValidUURL = (url) =>{
+    try{
+        new URL(url);
+        return true;
+    }
+    catch(err){
+        console.log(err);
+        return false;
+    }
+}
 
 const app = express()
 
@@ -16,6 +29,8 @@ app.set('view engine', 'ejs')
 
 
 app.get('/',(req,res)=>{
+    //when a user request for our web page, lets log this eventr and we can add some 
+    //cookies if needed later on
     const error = {
         "first": ""
     }
@@ -26,15 +41,21 @@ app.get('/',(req,res)=>{
 
 app.post('/convert', (req,res)=>{
     const error = {
-        "first":"Can Not leave input empty"
+        "first":"Can Not leave input empty",
+        "second":"url format is wrong"
     }
     const url = req.body.url;
     //lets check if the url is empty
     if(url === ""){
         return res.render('./pages/index.ejs', {error:error});
     }
+    else if(!isValidUURL(url)){
+        //make sue to return the right error response
+        return res.render('./pages/index.ejs', {error:error});
+    }
     console.log(url);
-    res.send("OK");
+    const video = youtubedl(url);
+    res.send(video);
 })
 
 app.all('*',(req,res)=>{
